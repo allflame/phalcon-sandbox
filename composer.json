@@ -1,0 +1,67 @@
+{
+  "name": "vain/phalcon-sandbox",
+  "type": "shared-package",
+  "authors": [
+    {
+      "name": "Taras Girnyk",
+      "email": "le@mirohost.net",
+      "homepage": "http://gitlab.cosmonova.net.ua/mmjitsu/phalcon-sandbox",
+      "role": "Maintainer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.6.0",
+    "vain/entity" : "dev-master",
+    "vain/event" : "dev-master",
+    "vain/operation" : "dev-master",
+    "vain/phalcon" : "dev-master"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-core.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-id.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-http.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-logger.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-database.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-operation.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-event.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-entity.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-phalcon.git"
+    }
+  ],
+  "config": {
+    "secure-http": false
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}
