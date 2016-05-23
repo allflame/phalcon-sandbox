@@ -1,14 +1,11 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require 'bootstrap.php';
 
 try {
-
-    $bootstrapper = (new \Vain\Phalcon\Bootstrapper\Factory\MvcBootstrapperFactory())->createBootstrapper();
-    $application = new \Phalcon\Mvc\Application();
-    $bootstrapper->bootstrap($application, new \Phalcon\Di\FactoryDefault());
-
-    echo $application->handle()->getContent();
+    $application = $di->get('app.self');
+    $di->get('app.bootstrapper.factory')->createBootstrapper()->bootstrap($application);
+    $application->handle();//->send();
 } catch (\Exception $e) {
      echo "Exception: ", $e->getMessage();
 }

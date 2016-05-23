@@ -14,6 +14,6 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        echo '1';
+        $this->response->appendContent('Test');
     }
 }

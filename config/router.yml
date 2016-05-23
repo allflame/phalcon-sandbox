@@ -1,0 +1,4 @@
+routes:
+  /test:
+    controller: app.controller.index
+    action: index

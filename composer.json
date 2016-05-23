@@ -57,6 +57,10 @@
     {
       "type": "git",
       "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-phalcon.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/taras.girnyk/vain-config.git"
     }
   ],
   "config": {
