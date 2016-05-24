@@ -3,9 +3,9 @@
 require 'bootstrap.php';
 
 try {
-    $application = $di->get('app.self');
-    $di->get('app.bootstrapper.factory')->createBootstrapper()->bootstrap($application);
-    $application->handle()->send();
+    $request = $di->get('http.request.factory')->createRequest($_SERVER, $_GET, [], $_POST, $_FILES, $_COOKIE, 'php://input');
+    $response = $application->handleRequest($request);
+    $emitter->send($response);
 } catch (\Exception $e) {
      echo "Exception: ", $e->getMessage();
 }

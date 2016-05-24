@@ -2,6 +2,7 @@ parameters:
     app.dir: '/home/allflame/src/php/phalcon-sandbox'
     app.config.dir: 'config'
     app.cache.dir: 'cache'
+    http.views.dir: '../www/views'
 
 services:
     app.di:
@@ -9,7 +10,7 @@ services:
         arguments: ['@service_container']
     app.bootstrapper.factory:
         class: Vain\Phalcon\Bootstrapper\Factory\MvcBootstrapperFactory
-        arguments: ['@http.factory', '@http.factory', '@http.view', '@http.request.proxy', '@http.response.proxy', '@event.dispatcher', '@config.provider']
+        arguments: ['@config.provider']
     app.router:
         class: Phalcon\Mvc\Router
         arguments: [false]
@@ -17,6 +18,8 @@ services:
     app.dispatcher:
         class: Phalcon\Mvc\Dispatcher
     dispatcher: '@app.dispatcher'
+    app.emitter:
+        class: Vain\Http\Response\Emitter\Sapi\SapiEmitter
     app.modelsManager:
         class: Phalcon\Mvc\Model\Manager
     modelsManager: '@app.modelsManager'
@@ -25,7 +28,10 @@ services:
     modelsMetadata: '@app.modelsMetadata'
     app.self:
         class: Vain\Phalcon\Application\PhalconApplication
-        arguments: ['@http.factory', '@app.di']
+        arguments: ['@http.request.proxy', '@http.response.proxy', '@http.response.factory', '@app.di']
+    app.phalcon:
+        class: Phalcon\Mvc\Application
+        arguments: ['@app.di']
     app.controller.indexController:
         class: App\Controller\IndexController
     app.escaper:
@@ -94,15 +100,19 @@ services:
         class: Vain\Phalcon\Http\Cookie\Factory\PhalconCookieFactory
     http.factory:
         class: Vain\Phalcon\Http\Factory\PhalconHttpFactory
-        arguments: ['@http.filter', '@http.emitter', '@http.header.provider','@http.cookie.factory' ,'@http.header.factory']
+        arguments: ['@http.filter', '@http.header.provider','@http.cookie.factory' ,'@http.header.factory']
     http.response.proxy:
         class: Vain\Phalcon\Http\Response\Proxy\PhalconResponseProxy
     response: '@http.response.proxy'
+    http.response.factory: '@http.factory'
     http.request.proxy:
         class: Vain\Phalcon\Http\Request\Proxy\PhalconRequestProxy
     request: '@http.request.proxy'
+    http.request.factory: '@http.factory'
     http.view:
         class: Phalcon\Mvc\View
+        calls:
+          - [setViewsDir, ['%http.views.dir']]
     view: '@http.view'
     http.url:
         class: Phalcon\Mvc\Url
