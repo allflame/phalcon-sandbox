@@ -16,10 +16,10 @@
   },
   "require": {
     "php": ">=5.6.0",
-    "vain/entity" : "dev-master",
-    "vain/event" : "dev-master",
-    "vain/operation" : "dev-master",
-    "vain/phalcon" : "dev-master"
+    "vain/entity" : "dev-dev",
+    "vain/event" : "dev-dev",
+    "vain/operation" : "dev-dev",
+    "vain/phalcon" : "dev-dev"
   },
   "repositories": [
     {
