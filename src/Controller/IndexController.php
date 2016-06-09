@@ -8,12 +8,17 @@
 
 namespace App\Controller;
 
+use App\Command\TestRuleCommand;
 use Phalcon\Mvc\Controller;
 
 class IndexController extends Controller
 {
     public function indexAction()
     {
-        $this->response->appendContent('Test');
+        /**
+         * @var TestRuleCommand $command
+         */
+        $command = $this->getDI()->get('app.command.testRule');
+        $this->response->appendContent($command->execute());
     }
 }

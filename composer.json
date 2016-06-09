@@ -19,12 +19,41 @@
     "vain/entity" : "dev-dev",
     "vain/event" : "dev-dev",
     "vain/operation" : "dev-dev",
+    "vain/rule" : "dev-dev",
     "vain/phalcon" : "dev-dev"
   },
   "repositories": [
     {
       "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-comparator.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/taras.girnyk/vain-config.git"
+    },
+    {
+      "type": "git",
       "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-core.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/taras.girnyk/vain-data.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-database.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-entity.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-event.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-expression.git"
     },
     {
       "type": "git",
@@ -40,19 +69,7 @@
     },
     {
       "type": "git",
-      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-database.git"
-    },
-    {
-      "type": "git",
       "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-operation.git"
-    },
-    {
-      "type": "git",
-      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-event.git"
-    },
-    {
-      "type": "git",
-      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-entity.git"
     },
     {
       "type": "git",
@@ -60,7 +77,11 @@
     },
     {
       "type": "git",
-      "url": "http://gitlab.cosmonova.net.ua/taras.girnyk/vain-config.git"
+      "url": "http://gitlab.cosmonova.net.ua/taras.girnyk/vain-rule.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-value.git"
     }
   ],
   "config": {
