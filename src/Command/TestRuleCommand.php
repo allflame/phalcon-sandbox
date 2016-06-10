@@ -8,15 +8,14 @@
 
 namespace App\Command;
 
-use App\Data\Module\Factory\ModuleFactory;
 use Vain\Core\Runtime\RuntimeData;
 use Vain\Expression\Boolean\AndX\AndExpression;
 use Vain\Expression\Boolean\Equal\EqualExpression;
 use Vain\Expression\Boolean\GreaterOrEqual\GreaterOrEqualExpression;
 use Vain\Expression\Builder\ExpressionBuilder;
 use Vain\Expression\Parser\ParserInterface;
-use Vain\Expression\Serializer\SerializerInterface;
 use Vain\Rule\Evaluator\EvaluatorInterface;
+use Vain\Rule\Rule;
 
 class TestRuleCommand
 {
@@ -24,22 +23,18 @@ class TestRuleCommand
 
     private $parser;
 
-    private $serializer;
-
     private $builder;
 
     /**
      * TestRuleCommand constructor.
      * @param EvaluatorInterface $evaluator
      * @param ParserInterface $parser
-     * @param SerializerInterface $serializer
      * @param ExpressionBuilder $expressionBuilder
      */
-    public function __construct(EvaluatorInterface $evaluator, ParserInterface $parser, SerializerInterface $serializer, ExpressionBuilder $expressionBuilder)
+    public function __construct(EvaluatorInterface $evaluator, ParserInterface $parser, ExpressionBuilder $expressionBuilder)
     {
         $this->evaluator = $evaluator;
         $this->parser = $parser;
-        $this->serializer = $serializer;
         $this->builder = $expressionBuilder;
     }
 
@@ -58,7 +53,7 @@ class TestRuleCommand
                 ->inPlace(1)
                 ->getExpression()
         );
-        $expression = new GreaterOrEqualExpression(
+        $basketExpression = new GreaterOrEqualExpression(
             $this->builder
                 ->context()
                 ->property('basket')
@@ -72,6 +67,21 @@ class TestRuleCommand
                 ->inPlace(4)
                 ->getExpression()
         );
+        $basketRule = new Rule('basket', $basketExpression);
+        $phpVersionExpression = new EqualExpression(
+            $this->builder
+                ->context()
+                ->property('php_version')
+                ->getExpression(),
+            $this->builder
+                ->mode('int')
+                ->inPlace(PHP_VERSION)
+                ->getExpression()
+        );
+        $phpRule = new Rule('php', $phpVersionExpression);
+        $andExpression = new AndExpression($basketRule, $phpRule);
+        $specialRule = new Rule('special', $andExpression);
+
         $items = [];
         $totalWeight = 0;
         for ($i = 1; $i <= 5; $i++) {
@@ -82,7 +92,9 @@ class TestRuleCommand
         $transaction = new RuntimeData(['id' => 100, 'items' => $items, 'weight' => $totalWeight]);
         $basket = new RuntimeData(['transaction' => $transaction]);
         $runtimeData = new RuntimeData(['basket' => $basket, 'api' => 'backoffice', 'php_version' => PHP_VERSION]);
-
-        return $expression->accept($this->parser) . "\n" . $expression->accept($this->evaluator->withContext($runtimeData));
+        return $specialRule->accept($this->evaluator->withContext($runtimeData))->accept($this->parser);
+        var_dump($specialRule->accept($this->evaluator->withContext($runtimeData)));
+        die();
+        return $specialRule->accept($this->parser); // . "\n" . $andExpression->accept($this->evaluator->withContext($runtimeData));
     }
 }

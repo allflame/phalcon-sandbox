@@ -12,7 +12,7 @@ services:
         class: App\Controller\IndexController
     app.command.testRule:
         class: App\Command\TestRuleCommand
-        arguments: ['@rule.evaluator', '@expression.parser.human', '@expression.serializer', '@expression.builder']
+        arguments: ['@rule.evaluator', '@expression.parser.human', '@expression.builder']
     app.data.module.factory:
         class: App\Data\Module\Factory\ModuleFactory
     data.module.factory: '@app.data.module.factory'
