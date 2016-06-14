@@ -13,13 +13,14 @@ use Vain\Expression\Boolean\AndX\AndExpression;
 use Vain\Expression\Boolean\Equal\EqualExpression;
 use Vain\Expression\Boolean\GreaterOrEqual\GreaterOrEqualExpression;
 use Vain\Expression\Builder\ExpressionBuilder;
+use Vain\Expression\Interpreter\InterpreterInterface;
 use Vain\Expression\Parser\ParserInterface;
-use Vain\Rule\Evaluator\EvaluatorInterface;
-use Vain\Rule\Rule;
+use Vain\Expression\Rule\Result\RuleResult;
+use Vain\Expression\Rule\Rule;
 
 class TestRuleCommand
 {
-    private $evaluator;
+    private $interpreter;
 
     private $parser;
 
@@ -27,13 +28,13 @@ class TestRuleCommand
 
     /**
      * TestRuleCommand constructor.
-     * @param EvaluatorInterface $evaluator
+     * @param InterpreterInterface $interpreter
      * @param ParserInterface $parser
      * @param ExpressionBuilder $expressionBuilder
      */
-    public function __construct(EvaluatorInterface $evaluator, ParserInterface $parser, ExpressionBuilder $expressionBuilder)
+    public function __construct(InterpreterInterface $interpreter, ParserInterface $parser, ExpressionBuilder $expressionBuilder)
     {
-        $this->evaluator = $evaluator;
+        $this->interpreter = $interpreter;
         $this->parser = $parser;
         $this->builder = $expressionBuilder;
     }
@@ -92,8 +93,13 @@ class TestRuleCommand
         $transaction = new RuntimeData(['id' => 100, 'items' => $items, 'weight' => $totalWeight]);
         $basket = new RuntimeData(['transaction' => $transaction]);
         $runtimeData = new RuntimeData(['basket' => $basket, 'api' => 'backoffice', 'php_version' => PHP_VERSION]);
-        return $specialRule->accept($this->evaluator->withContext($runtimeData))->accept($this->parser);
-        var_dump($specialRule->accept($this->evaluator->withContext($runtimeData)));
+        /**
+         * @var RuleResult $result
+         */
+        $result = $specialRule->accept($this->interpreter->withContext($runtimeData));
+        return $result->__toString();
+        return $result->accept($this->parser);
+        //var_dump($specialRule->accept($this->interpreter->withContext($runtimeData)));
         die();
         return $specialRule->accept($this->parser); // . "\n" . $andExpression->accept($this->evaluator->withContext($runtimeData));
     }
