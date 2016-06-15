@@ -2,7 +2,6 @@ imports:
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/comparator/config/di.yml' }
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/config/config/di.yml' }
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/core/config/di.yml' }
-    - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/data/config/di.yml' }
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/expression/config/di.yml' }
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/http/config/di.yml' }
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/phalcon/config/di.yml' }
@@ -12,7 +11,7 @@ services:
         class: App\Controller\IndexController
     app.command.testRule:
         class: App\Command\TestRuleCommand
-        arguments: ['@expression.interpreter', '@expression.parser.human', '@expression.builder']
+        arguments: ['@expression.builder', '@comparator.repository']
     app.data.module.factory:
         class: App\Data\Module\Factory\ModuleFactory
     data.module.factory: '@app.data.module.factory'

@@ -18,6 +18,7 @@
     "php": ">=5.6.0",
     "vain/entity" : "dev-dev",
     "vain/event" : "dev-dev",
+    "vain/comparator" : "dev-dev",
     "vain/expression" : "dev-dev",
     "vain/operation" : "dev-dev",
     "vain/phalcon" : "dev-dev"

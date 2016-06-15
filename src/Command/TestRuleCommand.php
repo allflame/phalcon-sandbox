@@ -8,35 +8,29 @@
 
 namespace App\Command;
 
+use Vain\Comparator\Expression\Equal\EqualExpression;
+use Vain\Comparator\Expression\GreaterOrEqual\GreaterOrEqualExpression;
+use Vain\Comparator\Repository\ComparatorRepositoryInterface;
 use Vain\Core\Runtime\RuntimeData;
-use Vain\Expression\Boolean\AndX\AndExpression;
-use Vain\Expression\Boolean\Equal\EqualExpression;
-use Vain\Expression\Boolean\GreaterOrEqual\GreaterOrEqualExpression;
 use Vain\Expression\Builder\ExpressionBuilder;
-use Vain\Expression\Interpreter\InterpreterInterface;
-use Vain\Expression\Parser\ParserInterface;
-use Vain\Expression\Rule\Result\RuleResult;
 use Vain\Expression\Rule\Rule;
 
 class TestRuleCommand
 {
-    private $interpreter;
-
-    private $parser;
 
     private $builder;
 
+    private $comparatorRepository;
+
     /**
      * TestRuleCommand constructor.
-     * @param InterpreterInterface $interpreter
-     * @param ParserInterface $parser
      * @param ExpressionBuilder $expressionBuilder
+     * @param ComparatorRepositoryInterface $comparatorRepository
      */
-    public function __construct(InterpreterInterface $interpreter, ParserInterface $parser, ExpressionBuilder $expressionBuilder)
+    public function __construct(ExpressionBuilder $expressionBuilder, ComparatorRepositoryInterface $comparatorRepository)
     {
-        $this->interpreter = $interpreter;
-        $this->parser = $parser;
         $this->builder = $expressionBuilder;
+        $this->comparatorRepository = $comparatorRepository;
     }
 
     /**
@@ -52,7 +46,8 @@ class TestRuleCommand
             $this->builder
                 ->mode('int')
                 ->inPlace(1)
-                ->getExpression()
+                ->getExpression(),
+            $this->comparatorRepository->getComparator('int')
         );
         $basketExpression = new GreaterOrEqualExpression(
             $this->builder
@@ -66,21 +61,23 @@ class TestRuleCommand
             $this->builder
                 ->mode('int')
                 ->inPlace(4)
-                ->getExpression()
+                ->getExpression(),
+            $this->comparatorRepository->getComparator('int')
         );
         $basketRule = new Rule('basket', $basketExpression);
-        $phpVersionExpression = new EqualExpression(
+        $phpVersionExpression = new GreaterOrEqualExpression(
             $this->builder
                 ->context()
                 ->property('php_version')
                 ->getExpression(),
             $this->builder
-                ->mode('int')
-                ->inPlace(PHP_VERSION)
-                ->getExpression()
+                ->mode('string')
+                ->inPlace('7')
+                ->getExpression(),
+            $this->comparatorRepository->getComparator('string')
         );
         $phpRule = new Rule('php', $phpVersionExpression);
-        $andExpression = new AndExpression($basketRule, $phpRule);
+        $andExpression = $this->builder->andX($basketRule, $phpRule);
         $specialRule = new Rule('special', $andExpression);
 
         $items = [];
@@ -93,14 +90,12 @@ class TestRuleCommand
         $transaction = new RuntimeData(['id' => 100, 'items' => $items, 'weight' => $totalWeight]);
         $basket = new RuntimeData(['transaction' => $transaction]);
         $runtimeData = new RuntimeData(['basket' => $basket, 'api' => 'backoffice', 'php_version' => PHP_VERSION]);
-        /**
-         * @var RuleResult $result
-         */
-        $result = $specialRule->accept($this->interpreter->withContext($runtimeData));
-        return $result->__toString();
-        return $result->accept($this->parser);
+
+        return $specialRule->__toString() . "\n" . $specialRule->interpret($runtimeData)->__toString();
+        //return $result->__toString();
+        //return $result->accept($this->parser);
         //var_dump($specialRule->accept($this->interpreter->withContext($runtimeData)));
-        die();
-        return $specialRule->accept($this->parser); // . "\n" . $andExpression->accept($this->evaluator->withContext($runtimeData));
+        //die();
+        //return $specialRule->accept($this->parser); // . "\n" . $andExpression->accept($this->evaluator->withContext($runtimeData));
     }
 }
