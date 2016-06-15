@@ -20,6 +20,7 @@
     "vain/event" : "dev-dev",
     "vain/comparator" : "dev-dev",
     "vain/expression" : "dev-dev",
+    "vain/rule" : "dev-dev",
     "vain/operation" : "dev-dev",
     "vain/phalcon" : "dev-dev"
   },
@@ -75,6 +76,10 @@
     {
       "type": "git",
       "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-phalcon.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/taras.girnyk/vain-rule.git"
     },
     {
       "type": "git",

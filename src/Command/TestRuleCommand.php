@@ -10,10 +10,11 @@ namespace App\Command;
 
 use Vain\Comparator\Expression\Equal\EqualExpression;
 use Vain\Comparator\Expression\GreaterOrEqual\GreaterOrEqualExpression;
+use Vain\Comparator\Expression\LessOrEqual\LessOrEqualExpression;
 use Vain\Comparator\Repository\ComparatorRepositoryInterface;
 use Vain\Core\Runtime\RuntimeData;
 use Vain\Expression\Builder\ExpressionBuilder;
-use Vain\Expression\Rule\Rule;
+use Vain\Rule\Rule;
 
 class TestRuleCommand
 {
@@ -65,7 +66,7 @@ class TestRuleCommand
             $this->comparatorRepository->getComparator('int')
         );
         $basketRule = new Rule('basket', $basketExpression);
-        $phpVersionExpression = new GreaterOrEqualExpression(
+        $phpVersionExpression = new LessOrEqualExpression(
             $this->builder
                 ->context()
                 ->property('php_version')
@@ -78,7 +79,7 @@ class TestRuleCommand
         );
         $phpRule = new Rule('php', $phpVersionExpression);
         $andExpression = $this->builder->andX($basketRule, $phpRule);
-        $specialRule = new Rule('special', $andExpression);
+        $promo = new Rule('promo', $andExpression);
 
         $items = [];
         $totalWeight = 0;
@@ -91,7 +92,7 @@ class TestRuleCommand
         $basket = new RuntimeData(['transaction' => $transaction]);
         $runtimeData = new RuntimeData(['basket' => $basket, 'api' => 'backoffice', 'php_version' => PHP_VERSION]);
 
-        return $specialRule->__toString() . "\n" . $specialRule->interpret($runtimeData)->__toString();
+        return $promo->__toString() . "\n" . $promo->interpret($runtimeData)->__toString();
         //return $result->__toString();
         //return $result->accept($this->parser);
         //var_dump($specialRule->accept($this->interpreter->withContext($runtimeData)));
