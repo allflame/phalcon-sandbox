@@ -92,7 +92,7 @@ class TestRuleCommand
         $basket = new RuntimeData(['transaction' => $transaction]);
         $runtimeData = new RuntimeData(['basket' => $basket, 'api' => 'backoffice', 'php_version' => PHP_VERSION]);
 
-        return $promo->__toString() . "\n" . $promo->interpret($runtimeData)->__toString();
+        return $promo->__toString() . "\n" . json_encode($promo->interpret($runtimeData)->toArray()) . "\n";
         //return $result->__toString();
         //return $result->accept($this->parser);
         //var_dump($specialRule->accept($this->interpreter->withContext($runtimeData)));
