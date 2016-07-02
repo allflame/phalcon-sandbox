@@ -1,4 +1,8 @@
 routes:
-  /test:
+  /testRule:
     controller: app.controller.index
-    action: index
+    action: testRule
+  /testBuilder:
+    controller: app.controller.index
+    action: testBuilder
+

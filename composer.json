@@ -22,7 +22,8 @@
     "vain/expression" : "dev-dev",
     "vain/rule" : "dev-dev",
     "vain/operation" : "dev-dev",
-    "vain/phalcon" : "dev-dev"
+    "vain/phalcon" : "dev-dev",
+    "vain/time" : "dev-dev"
   },
   "repositories": [
     {
@@ -76,6 +77,10 @@
     {
       "type": "git",
       "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-phalcon.git"
+    },
+    {
+      "type": "git",
+      "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-time.git"
     },
     {
       "type": "git",

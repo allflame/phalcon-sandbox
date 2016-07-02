@@ -15,7 +15,13 @@ use Vain\Comparator\Repository\ComparatorRepositoryInterface;
 use Vain\Core\Runtime\RuntimeData;
 use Vain\Expression\Builder\ExpressionBuilder;
 use Vain\Rule\Rule;
+use Vain\Time\Factory\TimeFactoryInterface;
 
+/**
+ * Class TestRuleCommand
+ *
+ * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
+ */
 class TestRuleCommand
 {
 
@@ -23,15 +29,18 @@ class TestRuleCommand
 
     private $comparatorRepository;
 
+    private $timeFactory;
+
     /**
      * TestRuleCommand constructor.
      * @param ExpressionBuilder $expressionBuilder
      * @param ComparatorRepositoryInterface $comparatorRepository
      */
-    public function __construct(ExpressionBuilder $expressionBuilder, ComparatorRepositoryInterface $comparatorRepository)
+    public function __construct(ExpressionBuilder $expressionBuilder, ComparatorRepositoryInterface $comparatorRepository, TimeFactoryInterface $timeFactory)
     {
         $this->builder = $expressionBuilder;
         $this->comparatorRepository = $comparatorRepository;
+        $this->timeFactory = $timeFactory;
     }
 
     /**
@@ -93,10 +102,5 @@ class TestRuleCommand
         $runtimeData = new RuntimeData(['basket' => $basket, 'api' => 'backoffice', 'php_version' => PHP_VERSION]);
 
         return $promo->__toString() . "\n" . json_encode($promo->interpret($runtimeData)->toArray()) . "\n";
-        //return $result->__toString();
-        //return $result->accept($this->parser);
-        //var_dump($specialRule->accept($this->interpreter->withContext($runtimeData)));
-        //die();
-        //return $specialRule->accept($this->parser); // . "\n" . $andExpression->accept($this->evaluator->withContext($runtimeData));
     }
 }
