@@ -15,7 +15,7 @@ services:
         arguments: ['@expression.builder', '@comparator.repository', '@time.factory']
     app.command.testBuilder:
         class: App\Command\TestBuilderCommand
-        arguments: ['@expression.parser']
+        arguments: ['@expression.parser', '@expression.lexer']
     app.data.module.factory:
         class: App\Data\Module\Factory\ModuleFactory
     data.module.factory: '@app.data.module.factory'

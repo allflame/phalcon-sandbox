@@ -10,6 +10,7 @@
  */
 namespace App\Command;
 
+use Vain\Expression\Lexer\LexerInterface;
 use Vain\Expression\Parser\ParserInterface;
 
 /**
@@ -21,13 +22,18 @@ class TestBuilderCommand
 {
     private $parser;
 
+    private $lexer;
+
     /**
      * TestRuleCommand constructor.
+     *
      * @param ParserInterface $parser
+     * @param LexerInterface  $lexer
      */
-    public function __construct(ParserInterface $parser)
+    public function __construct(ParserInterface $parser, LexerInterface $lexer)
     {
         $this->parser = $parser;
+        $this->lexer = $lexer;
     }
 
     /**
@@ -35,10 +41,10 @@ class TestBuilderCommand
      */
     public function execute()
     {
-        $string = '(3 + 4) * 5';
-        $expression = $this->parser->parse($string);
-
-        var_dump($expression);
+        $string = '2 + 3';
+        $expression = $this->parser->parse($this->lexer->process($string))->getExpression();
+        var_dump($expression->__toString());
+        var_dump($expression->interpret());
 
         return '';
     }
