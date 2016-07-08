@@ -41,8 +41,8 @@ class TestBuilderCommand
      */
     public function execute()
     {
-        $string = '2 + 3';
-        $expression = $this->parser->parse($this->lexer->process($string))->getExpression();
+        $string = '2 * 3 + 5';
+        $expression = $this->parser->parse($this->lexer->process($string));
         var_dump($expression->__toString());
         var_dump($expression->interpret());
 
