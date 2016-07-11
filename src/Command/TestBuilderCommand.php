@@ -41,7 +41,7 @@ class TestBuilderCommand
      */
     public function execute()
     {
-        $string = '3 + 4 * 2 / ( 1 - 5 ) ** 2 ** 3';
+        $string = '2 ** 2 ** 3 - 6 / (5 - 2)';
         $expression = $this->parser->parse($this->lexer->process($string));
         var_dump($expression->__toString());
         var_dump($expression->interpret());
