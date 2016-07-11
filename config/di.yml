@@ -6,6 +6,7 @@ imports:
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/http/config/di.yml' }
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/phalcon/config/di.yml' }
     - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/time/config/di.yml' }
+    - { resource: '/home/allflame/src/php/phalcon-sandbox/vendor/vain/logger/config/di.yml' }
 
 services:
     app.controller.indexController:
