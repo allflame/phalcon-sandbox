@@ -45,16 +45,5 @@ class TestTimeCommand
         echo $time4->toSystem()  . "\n";
         $time5 = $this->timeFactory->createFromString('now', 'Europe/London (BST GMT+0100)');
         echo $time5->toSystem();
-
-//      var_dump($a->getName());
-//      var_dump($a->getLocation());
-//        echo (new \DateTime('now', $a))->format(DATE_W3C) . "\n";
-//        $b = new \DateTimeZone((new \DateTime('now', $a))->format('T'));
-//        echo (new \DateTime('now', $b))->format(DATE_W3C) . "\n";
-//        echo (new \DateTime('now', $b))->format('T') . "\n";
-//      var_dump($a->getOffset(new \DateTime('now')));
-//      var_dump($a->listAbbreviations());
-//        var_dump($a);
-
     }
 }
