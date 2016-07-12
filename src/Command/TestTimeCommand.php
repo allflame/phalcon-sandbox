@@ -12,6 +12,11 @@ namespace App\Command;
 
 use Vain\Time\Factory\TimeFactoryInterface;
 
+/**
+ * Class TestTimeCommand
+ *
+ * @author Taras P. Girnyk <taras.p.gyrnik@gmail.com>
+ */
 class TestTimeCommand
 {
     private $timeFactory;
