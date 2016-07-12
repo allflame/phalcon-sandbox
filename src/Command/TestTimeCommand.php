@@ -47,6 +47,7 @@ class TestTimeCommand
         echo $time3->format(DATE_W3C);
         echo $time3->format('Y-m-d H:i:s T')  . "\n";
         echo $time4->format('Y-m-d H:i:s T')  . "\n";
+        echo $time3->getTimeZoneSpec() . "\n";
         echo $time3->toSystem()  . "\n";
         echo $time4->toSystem()  . "\n";
         echo $time3->getTimezone()->getSynonym() . "\n";
