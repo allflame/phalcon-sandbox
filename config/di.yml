@@ -10,13 +10,16 @@ imports:
 
 services:
     app.controller.indexController:
-        class: App\Controller\IndexController
+      class: App\Controller\IndexController
     app.command.testRule:
-        class: App\Command\TestRuleCommand
-        arguments: ['@expression.builder', '@comparator.repository', '@time.factory']
+      class: App\Command\TestRuleCommand
+      arguments: ['@expression.builder', '@comparator.repository', '@time.factory']
     app.command.testBuilder:
-        class: App\Command\TestBuilderCommand
-        arguments: ['@expression.parser', '@expression.lexer']
+      class: App\Command\TestBuilderCommand
+      arguments: ['@expression.parser', '@expression.lexer']
     app.data.module.factory:
-        class: App\Data\Module\Factory\ModuleFactory
+      class: App\Data\Module\Factory\ModuleFactory
     data.module.factory: '@app.data.module.factory'
+    app.command.testTime:
+      class: App\Command\TestTimeCommand
+      arguments:  ['@time.factory']
