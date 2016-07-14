@@ -39,7 +39,7 @@ class TestTimeCommand
     {
         $time3 = $this->timeFactory->createFromString('now', 'America/Denver');
         $time4 = $time3->setTimezone(new TimeZone('Europe/Kiev', 'Europe/Kiev', 'EET'));
-        echo $time3->format(DATE_W3C) . "\n";
-        echo $time4->format(DATE_W3C);
+        echo md5(spl_object_hash($time3->getTimezone())) . " " . $time3->getTimeZoneSpec() . "\n";
+        echo md5(spl_object_hash($time4->getTimezone())) . " " . $time4->getTimeZoneSpec();
     }
 }
