@@ -16,14 +16,14 @@
   },
   "require": {
     "php": ">=5.6.0",
-    "vain/entity" : "dev-0.1",
-    "vain/event" : "dev-0.1",
-    "vain/comparator" : "dev-0.1",
-    "vain/expression" : "dev-0.1",
-    "vain/rule" : "dev-0.1",
-    "vain/operation" : "dev-0.1",
-    "vain/phalcon" : "dev-0.1",
-    "vain/time" : "dev-0.1"
+    "vain/entity" : "^0.1",
+    "vain/event" : "^0.1",
+    "vain/comparator" : "^0.1",
+    "vain/expression" : "^0.1",
+    "vain/rule" : "^0.1",
+    "vain/operation" : "^0.1",
+    "vain/phalcon" : "^0.1",
+    "vain/time" : "^0.1"
   },
   "repositories": [
     {
