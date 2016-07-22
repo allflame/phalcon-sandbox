@@ -16,14 +16,14 @@
   },
   "require": {
     "php": ">=5.6.0",
-    "vain/entity" : dev-master,
-    "vain/event" : dev-master,
-    "vain/comparator" : dev-master,
-    "vain/expression" : dev-master,
-    "vain/rule" : dev-master,
-    "vain/operation" : dev-master,
-    "vain/phalcon" : dev-master,
-    "vain/time" : dev-master
+    "vain/entity" : "dev-master",
+    "vain/event" : "dev-master",
+    "vain/comparator" : "dev-master",
+    "vain/expression" : "dev-master",
+    "vain/rule" : "dev-master",
+    "vain/operation" : "dev-master",
+    "vain/phalcon" : "dev-master",
+    "vain/time" : "dev-master"
   },
   "repositories": [
     {
